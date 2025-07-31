@@ -10,7 +10,11 @@ function ProductCard({ product }) {
 
   return (
     <div className={styles.productCard}>
-      <img src={product.image || "/placeholder.svg"} alt={product.name} className={styles.productImage} />
+      <img
+        src={product.image || "/placeholder.svg?height=200&width=200"}
+        alt={product.name}
+        className={styles.productImage}
+      />
       <h3 className={styles.productName}>{product.name}</h3>
       <p className={styles.productCategory}>{product.category}</p>
       <p className={styles.productPrice}>${product.price}</p>

@@ -1,10 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import SearchInput from "./components/SearchInput"
-import TodoInput from "../exercise5/components/TodoInput"
-import TodoStats from "../exercise5/components/TodoStats"
-import TodoItem from "../exercise5/components/TodoItem"
 import styles from "./FilterableTodoList.module.css"
 
 function FilterableTodoList() {
@@ -15,15 +11,19 @@ function FilterableTodoList() {
     { id: 4, text: "Create responsive design", completed: false },
     { id: 5, text: "Deploy to production", completed: true },
   ])
+  const [inputValue, setInputValue] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
 
-  const addTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      text: text,
-      completed: false,
+  const addTodo = () => {
+    if (inputValue.trim() !== "") {
+      const newTodo = {
+        id: Date.now(),
+        text: inputValue.trim(),
+        completed: false,
+      }
+      setTodos([...todos, newTodo])
+      setInputValue("")
     }
-    setTodos([...todos, newTodo])
   }
 
   const toggleTodo = (id) => {
@@ -34,17 +34,37 @@ function FilterableTodoList() {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
 
-  const filteredTodos = todos.filter((todo) => todo.text.toLowerCase().includes(searchTerm.toLowerCase()))
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      addTodo()
+    }
+  }
 
-  const completedCount = filteredTodos.filter((todo) => todo.completed).length
-  const totalCount = filteredTodos.length
+  const filteredTodos = todos.filter((todo) => todo.text.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Filterable Todo List</h2>
-      <SearchInput searchTerm={searchTerm} onSearch={setSearchTerm} />
-      <TodoStats totalCount={totalCount} completedCount={completedCount} />
-      <TodoInput onAdd={addTodo} />
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search todos..."
+        className={styles.searchInput}
+      />
+      <div className={styles.inputSection}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="Add a new todo..."
+          className={styles.input}
+        />
+        <button onClick={addTodo} className={styles.addButton}>
+          Add
+        </button>
+      </div>
       {filteredTodos.length === 0 ? (
         <div className={styles.noResults}>
           {searchTerm ? `No todos match "${searchTerm}"` : "No todos yet. Add one above!"}
@@ -52,7 +72,20 @@ function FilterableTodoList() {
       ) : (
         <ul className={styles.todoList}>
           {filteredTodos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} onToggle={toggleTodo} onDelete={deleteTodo} />
+            <li key={todo.id} className={`${styles.todoItem} ${todo.completed ? styles.completed : ""}`}>
+              <div className={styles.todoContent}>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                  className={styles.checkbox}
+                />
+                <span className={styles.todoText}>{todo.text}</span>
+              </div>
+              <button onClick={() => deleteTodo(todo.id)} className={styles.deleteButton}>
+                Delete
+              </button>
+            </li>
           ))}
         </ul>
       )}

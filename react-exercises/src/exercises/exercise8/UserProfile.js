@@ -1,9 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import LoadingSpinner from "./components/LoadingSpinner"
-import ErrorMessage from "./components/ErrorMessage"
-import UserCard from "./components/UserCard"
 import styles from "./UserProfile.module.css"
 
 function UserProfile() {
@@ -30,12 +27,48 @@ function UserProfile() {
     fetchUser()
   }, [])
 
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.title}>User Profile</h2>
+        <div className={styles.loading}>
+          <div className={styles.spinner}></div>
+          Loading user data...
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.title}>User Profile</h2>
+        <div className={styles.error}>Error: {error}</div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>User Profile</h2>
-      {loading && <LoadingSpinner />}
-      {error && <ErrorMessage error={error} />}
-      {user && !loading && !error && <UserCard user={user} />}
+      <div className={styles.userCard}>
+        <div className={styles.avatar}>{user.name.charAt(0)}</div>
+        <h3 className={styles.userName}>{user.name}</h3>
+        <div className={styles.userInfo}>
+          <div className={styles.infoItem}>
+            <strong>Email:</strong> {user.email}
+          </div>
+          <div className={styles.infoItem}>
+            <strong>Website:</strong> {user.website}
+          </div>
+          <div className={styles.infoItem}>
+            <strong>Phone:</strong> {user.phone}
+          </div>
+          <div className={styles.infoItem}>
+            <strong>Company:</strong> {user.company.name}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

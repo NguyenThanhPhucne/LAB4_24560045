@@ -34,20 +34,6 @@
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
-.stats {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: rgba(102, 126, 234, 0.1);
-  border-radius: 12px;
-}
-
-.stat {
-  font-weight: 500;
-  color: #667eea;
-}
-
 .inputSection {
   display: flex;
   gap: 0.5rem;
@@ -172,11 +158,5 @@
 
   .inputSection {
     flex-direction: column;
-  }
-
-  .stats {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
   }
 }

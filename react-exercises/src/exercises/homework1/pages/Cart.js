@@ -26,7 +26,11 @@ function Cart() {
       <div className={styles.cartItems}>
         {cartItems.map((item) => (
           <div key={item.id} className={styles.cartItem}>
-            <img src={item.image || "/placeholder.svg"} alt={item.name} className={styles.cartItemImage} />
+            <img
+              src={item.image || "/placeholder.svg?height=80&width=80"}
+              alt={item.name}
+              className={styles.cartItemImage}
+            />
             <div className={styles.cartItemInfo}>
               <h4 className={styles.cartItemName}>{item.name}</h4>
               <p className={styles.cartItemPrice}>${item.price}</p>

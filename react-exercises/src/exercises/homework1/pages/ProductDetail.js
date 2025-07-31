@@ -18,7 +18,11 @@ function ProductDetail() {
   return (
     <div className={styles.productDetail}>
       <div className={styles.productDetailGrid}>
-        <img src={product.image || "/placeholder.svg"} alt={product.name} className={styles.detailImage} />
+        <img
+          src={product.image || "/placeholder.svg?height=400&width=400"}
+          alt={product.name}
+          className={styles.detailImage}
+        />
         <div className={styles.detailInfo}>
           <h1 className={styles.detailTitle}>{product.name}</h1>
           <p className={styles.detailCategory}>Category: {product.category}</p>

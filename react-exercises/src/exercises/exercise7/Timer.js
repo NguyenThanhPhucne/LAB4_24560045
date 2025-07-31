@@ -1,8 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import TimeDisplay from "./components/TimeDisplay"
-import TimerControls from "./components/TimerControls"
 import styles from "./Timer.module.css"
 
 function Timer() {
@@ -23,24 +21,40 @@ function Timer() {
     }
   }, [isRunning])
 
-  const handleStart = () => {
+  const start = () => {
     setIsRunning(true)
   }
 
-  const handlePause = () => {
+  const pause = () => {
     setIsRunning(false)
   }
 
-  const handleReset = () => {
+  const reset = () => {
     setSeconds(0)
     setIsRunning(false)
+  }
+
+  const formatTime = (totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60)
+    const remainingSeconds = totalSeconds % 60
+    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`
   }
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Timer/Stopwatch</h2>
-      <TimeDisplay seconds={seconds} />
-      <TimerControls isRunning={isRunning} onStart={handleStart} onPause={handlePause} onReset={handleReset} />
+      <div className={styles.display}>{formatTime(seconds)}</div>
+      <div className={styles.controls}>
+        <button onClick={start} disabled={isRunning} className={`${styles.button} ${styles.startBtn}`}>
+          Start
+        </button>
+        <button onClick={pause} disabled={!isRunning} className={`${styles.button} ${styles.pauseBtn}`}>
+          Pause
+        </button>
+        <button onClick={reset} className={`${styles.button} ${styles.resetBtn}`}>
+          Reset
+        </button>
+      </div>
     </div>
   )
 }

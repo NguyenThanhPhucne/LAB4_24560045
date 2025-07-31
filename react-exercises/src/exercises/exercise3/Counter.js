@@ -6,15 +6,15 @@ import styles from "./Counter.module.css"
 function Counter() {
   const [count, setCount] = useState(0)
 
-  const handleIncrement = () => {
+  const increment = () => {
     setCount(count + 1)
   }
 
-  const handleDecrement = () => {
+  const decrement = () => {
     setCount(count - 1)
   }
 
-  const handleReset = () => {
+  const reset = () => {
     setCount(0)
   }
 
@@ -27,13 +27,13 @@ function Counter() {
         </div>
       </div>
       <div className={styles.buttons}>
-        <button onClick={handleIncrement} className={`${styles.button} ${styles.incrementBtn}`}>
+        <button onClick={increment} className={`${styles.button} ${styles.incrementBtn}`}>
           Increment
         </button>
-        <button onClick={handleDecrement} className={`${styles.button} ${styles.decrementBtn}`}>
+        <button onClick={decrement} className={`${styles.button} ${styles.decrementBtn}`}>
           Decrement
         </button>
-        <button onClick={handleReset} className={`${styles.button} ${styles.resetBtn}`}>
+        <button onClick={reset} className={`${styles.button} ${styles.resetBtn}`}>
           Reset
         </button>
       </div>
