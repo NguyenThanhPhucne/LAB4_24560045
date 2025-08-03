@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import styles from "../TodoList.module.css"
 
@@ -13,7 +11,7 @@ function TodoInput({ onAdd }) {
     }
   }
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleAdd()
     }
@@ -25,7 +23,7 @@ function TodoInput({ onAdd }) {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyDown}
         placeholder="Add a new todo..."
         className={styles.input}
       />

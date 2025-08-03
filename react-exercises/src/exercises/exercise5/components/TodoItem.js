@@ -1,5 +1,3 @@
-"use client"
-
 import styles from "../TodoList.module.css"
 
 function TodoItem({ todo, onToggle, onDelete }) {
