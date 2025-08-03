@@ -1,35 +1,75 @@
 .container {
   text-align: center;
-  padding: 2rem;
-  max-width: 400px;
+  padding: 2.5rem;
+  max-width: 450px;
   margin: 2rem auto;
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #bce6f9, #ffdbf2, #c8ffe1);
+  border-radius: 16px 16px 0 0;
+}
+
+.container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(14, 165, 233, 0.25);
+  border-color: rgba(14, 165, 233, 0.4);
 }
 
 .title {
-  color: #2c3e50;
-  font-size: 1.8rem;
+  color: #0369a1;
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 2rem;
+  letter-spacing: -0.025em;
 }
 
 .display {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #2c3e50;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #0369a1;
   margin: 2rem 0;
-  padding: 1.5rem;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  background-color: #f8f9fa;
-  font-family: "Courier New", monospace;
-  transition: all 0.3s ease;
+  padding: 2rem;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(14, 165, 233, 0.1);
+}
+
+.display::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+  border-radius: 16px 16px 0 0;
 }
 
 .display:hover {
-  background-color: #e9ecef;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+  border-color: #0ea5e9;
+  color: #0284c7;
+  transform: scale(1.02);
 }
 
 .controls {
@@ -40,56 +80,129 @@
 }
 
 .button {
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 2rem;
   border: none;
   border-radius: 8px;
   color: white;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  min-width: 80px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.button:hover::before {
+  left: 100%;
 }
 
 .button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .button:disabled {
-  background-color: #bdc3c7;
+  background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:disabled::before {
+  display: none;
 }
 
 .startBtn:not(:disabled) {
-  background: linear-gradient(135deg, #27ae60, #229954);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+.startBtn:not(:disabled):hover {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
 }
 
 .pauseBtn:not(:disabled) {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.pauseBtn:not(:disabled):hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
 }
 
 .resetBtn {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+.resetBtn:hover {
+  background: linear-gradient(135deg, #0284c7 0%, #0891b2 100%);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 1.5rem;
+    padding: 2rem;
+    margin: 1rem auto;
   }
 
   .display {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    padding: 1.5rem;
   }
 
   .controls {
     flex-direction: column;
     align-items: center;
+    gap: 0.8rem;
   }
 
   .button {
-    width: 150px;
+    width: 200px;
+    padding: 0.8rem 1.5rem;
   }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .display {
+    font-size: 2.5rem;
+    padding: 1rem;
+  }
+
+  .button {
+    width: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease !important;
+  }
+}
+
+.button:focus {
+  outline: 2px solid rgba(14, 165, 233, 0.6);
+  outline-offset: 2px;
 }
