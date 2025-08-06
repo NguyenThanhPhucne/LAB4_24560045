@@ -108,6 +108,8 @@
   margin-top: 1rem;
   position: relative;
   overflow: hidden;
+  align-self: center; /* Căn giữa nút trong flex container */
+  width: fit-content; /* Đảm bảo nút có chiều rộng vừa đủ với nội dung */
 }
 
 .button::before {
