@@ -50,9 +50,9 @@ function Contact() {
       <div className={`${styles.infoBox} ${styles.contactBox}`}>
         <strong className={styles.infoTitle}>Contact Information:</strong>
         <ul className={styles.infoList}>
-          <li>Email: contact@example.com</li>
-          <li>Phone: +1 (555) 123-4567</li>
-          <li>Address: 123 React Street, JS City</li>
+          <li>Email: 24560045@gm.uit.edu.vn</li>
+          <li>Phone: 0983218615</li>
+          <li>Address: 21/6 Thới Tứ, Thới Tam Thôn, Hóc Môn, Tp Hồ Chí Minh</li>
         </ul>
       </div>
     </div>
