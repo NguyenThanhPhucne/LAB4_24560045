@@ -11,3 +11,4 @@ function TodoStats({ totalCount, completedCount }) {
 }
 
 export default TodoStats
+

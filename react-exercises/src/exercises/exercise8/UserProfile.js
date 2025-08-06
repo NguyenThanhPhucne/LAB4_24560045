@@ -2,6 +2,10 @@
 
 import { useState, useEffect } from "react"
 import styles from "./UserProfile.module.css"
+import ProfileTitle from "./components/ProfileTitle"
+import UserCard from "./components/UserCard"
+import ErrorMessage from "./components/ErrorMessage"
+import LoadingSpinner from "./components/LoadingSpinner"
 
 function UserProfile() {
   const [user, setUser] = useState(null)
@@ -30,11 +34,8 @@ function UserProfile() {
   if (loading) {
     return (
       <div className={styles.container}>
-        <h2 className={styles.title}>User Profile</h2>
-        <div className={styles.loading}>
-          <div className={styles.spinner}></div>
-          Loading user data...
-        </div>
+        <ProfileTitle />
+        <LoadingSpinner />
       </div>
     )
   }
@@ -42,35 +43,19 @@ function UserProfile() {
   if (error) {
     return (
       <div className={styles.container}>
-        <h2 className={styles.title}>User Profile</h2>
-        <div className={styles.error}>Error: {error}</div>
+        <ProfileTitle />
+        <ErrorMessage error={error} />
       </div>
     )
   }
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>User Profile</h2>
-      <div className={styles.userCard}>
-        <div className={styles.avatar}>{user.name.charAt(0)}</div>
-        <h3 className={styles.userName}>{user.name}</h3>
-        <div className={styles.userInfo}>
-          <div className={styles.infoItem}>
-            <strong>Email:</strong> {user.email}
-          </div>
-          <div className={styles.infoItem}>
-            <strong>Website:</strong> {user.website}
-          </div>
-          <div className={styles.infoItem}>
-            <strong>Phone:</strong> {user.phone}
-          </div>
-          <div className={styles.infoItem}>
-            <strong>Company:</strong> {user.company.name}
-          </div>
-        </div>
-      </div>
+      <ProfileTitle />
+      <UserCard user={user} />
     </div>
   )
 }
 
 export default UserProfile
+

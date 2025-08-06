@@ -1,7 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import styles from "./LoginForm.module.css"
+import FormInput from "./components/FormInput"
+import SuccessMessage from "./components/SuccessMessage"
+import FormTitle from "./components/FormTitle"
+import SubmitButton from "./components/SubmitButton"
+import LoginFormContainer from "./components/LoginFormContainer"
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -65,55 +69,37 @@ function LoginForm() {
 
   const isFormValid = formData.email.includes("@") && formData.password.length >= 6
 
-  if (isSubmitted) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.success}>
-          <div className={styles.successIcon}>✓</div>
-          <h3>Login Successful!</h3>
-          <p>Welcome back, {formData.email}</p>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Login Form</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
-            placeholder="Enter your email"
-          />
-          {errors.email && <span className={styles.error}>{errors.email}</span>}
-        </div>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            className={`${styles.input} ${errors.password ? styles.inputError : ""}`}
-            placeholder="Enter your password"
-          />
-          {errors.password && <span className={styles.error}>{errors.password}</span>}
-        </div>
-        <button
-          type="submit"
-          disabled={!isFormValid}
-          className={`${styles.button} ${!isFormValid ? styles.buttonDisabled : ""}`}
-        >
-          Login
-        </button>
-      </form>
-    </div>
+    <LoginFormContainer>
+      {isSubmitted ? (
+        <SuccessMessage email={formData.email} />
+      ) : (
+        <>
+          <FormTitle />
+          <form onSubmit={handleSubmit}>
+            <FormInput
+              label="Email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              error={errors.email}
+              placeholder="Enter your email"
+            />
+            <FormInput
+              label="Password"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              error={errors.password}
+              placeholder="Enter your password"
+            />
+            <SubmitButton isValid={isFormValid} onClick={handleSubmit} />
+          </form>
+        </>
+      )}
+    </LoginFormContainer>
   )
 }
 
