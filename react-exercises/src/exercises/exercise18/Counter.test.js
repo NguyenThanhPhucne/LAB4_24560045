@@ -6,16 +6,16 @@ import LoginForm from "../exercise10/LoginForm"
 describe("LoginForm Component", () => {
   test("renders form with initial empty inputs", () => {
     render(<LoginForm />)
-    const emailInput = screen.getByLabelText("Email:")
-    const passwordInput = screen.getByLabelText("Password:")
+    const emailInput = screen.getByPlaceholderText("Enter your email")
+    const passwordInput = screen.getByPlaceholderText("Enter your password")
     expect(emailInput).toHaveValue("")
     expect(passwordInput).toHaveValue("")
   })
 
   test("simulates typing into the email and password fields", () => {
     render(<LoginForm />)
-    const emailInput = screen.getByLabelText("Email:")
-    const passwordInput = screen.getByLabelText("Password:")
+    const emailInput = screen.getByPlaceholderText("Enter your email")
+    const passwordInput = screen.getByPlaceholderText("Enter your password")
     fireEvent.change(emailInput, { target: { value: "test@example.com" } })
     fireEvent.change(passwordInput, { target: { value: "password123" } })
     expect(emailInput).toHaveValue("test@example.com")
@@ -24,8 +24,8 @@ describe("LoginForm Component", () => {
 
   test("asserts that validation error messages appear when inputs are invalid", () => {
     render(<LoginForm />)
-    const emailInput = screen.getByLabelText("Email:")
-    const passwordInput = screen.getByLabelText("Password:")
+    const emailInput = screen.getByPlaceholderText("Enter your email")
+    const passwordInput = screen.getByPlaceholderText("Enter your password")
     fireEvent.change(emailInput, { target: { value: "invalid" } })
     fireEvent.change(passwordInput, { target: { value: "12345" } })
     expect(screen.getByText("Email must contain @ symbol")).toBeInTheDocument()
@@ -40,8 +40,8 @@ describe("LoginForm Component", () => {
 
   test("simulates a successful form submission and asserts that a success message is displayed", () => {
     render(<LoginForm />)
-    const emailInput = screen.getByLabelText("Email:")
-    const passwordInput = screen.getByLabelText("Password:")
+    const emailInput = screen.getByPlaceholderText("Enter your email")
+    const passwordInput = screen.getByPlaceholderText("Enter your password")
     const submitButton = screen.getByRole("button", { name: "Login" })
     fireEvent.change(emailInput, { target: { value: "test@example.com" } })
     fireEvent.change(passwordInput, { target: { value: "password123" } })
